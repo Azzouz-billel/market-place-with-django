@@ -1,5 +1,7 @@
 from django.db.models import Avg, Count
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
+from rest_framework.filters import OrderingFilter
 
 from .filters import ProductFilter
 from .models import Category, Product
@@ -18,8 +20,9 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     lookup_field = "slug"
+    # Search is handled inside ProductFilter (full-text on Postgres, icontains on SQLite).
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = ProductFilter
-    search_fields = ["name", "description"]
     ordering_fields = ["base_price", "name", "created_at"]
     ordering = ["-created_at"]
 

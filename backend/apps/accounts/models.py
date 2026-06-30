@@ -40,6 +40,23 @@ class User(AbstractUser):
         return self.email
 
 
+class WishlistItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="wishlist_items")
+    product = models.ForeignKey(
+        "catalog.Product", on_delete=models.CASCADE, related_name="wishlisted_by"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(fields=["user", "product"], name="one_wishlist_entry_per_product")
+        ]
+
+    def __str__(self):
+        return f"{self.user} ♥ {self.product}"
+
+
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="addresses")
     label = models.CharField(max_length=60, blank=True)

@@ -5,6 +5,7 @@ import AuthProvider from "@/components/AuthProvider";
 import CartProvider from "@/components/CartProvider";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
+import WishlistProvider from "@/components/WishlistProvider";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -64,11 +65,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
         />
         <AuthProvider>
-          <CartProvider>
-            <Nav />
-            <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
-            <Footer />
-          </CartProvider>
+          <WishlistProvider>
+            <CartProvider>
+              <Nav />
+              <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+              <Footer />
+            </CartProvider>
+          </WishlistProvider>
         </AuthProvider>
       </body>
     </html>

@@ -6,6 +6,7 @@ import ImageGallery from "@/components/ImageGallery";
 import ProductGrid from "@/components/ProductGrid";
 import ProductReviews from "@/components/ProductReviews";
 import VariantSelector from "@/components/VariantSelector";
+import WishlistButton from "@/components/WishlistButton";
 import { getProduct } from "@/lib/api";
 import { formatPrice } from "@/lib/format";
 import { SITE_URL } from "@/lib/site";
@@ -82,7 +83,10 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-2">
             <p className="text-sm uppercase tracking-wide text-muted">{product.category.name}</p>
-            <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
+            <div className="flex items-start justify-between gap-4">
+              <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
+              <WishlistButton slug={product.slug} />
+            </div>
             <p className="text-2xl font-semibold">{formatPrice(product.base_price)}</p>
           </div>
 

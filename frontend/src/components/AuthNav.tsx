@@ -33,6 +33,12 @@ export default function AuthNav() {
   return (
     <div className="flex items-center gap-1">
       <Link
+        href="/wishlist"
+        className="rounded-base px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
+      >
+        Wishlist
+      </Link>
+      <Link
         href="/account"
         className="rounded-base px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-foreground"
       >

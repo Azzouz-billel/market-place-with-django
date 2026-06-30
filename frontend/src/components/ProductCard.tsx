@@ -2,17 +2,22 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Stars from "@/components/Stars";
+import WishlistButton from "@/components/WishlistButton";
 import { formatPrice } from "@/lib/format";
 import type { ProductListItem } from "@/types/catalog";
 
 export default function ProductCard({ product }: { product: ProductListItem }) {
   const image = product.primary_image;
   return (
-    <Link
-      href={`/products/${product.slug}`}
-      className="group flex flex-col overflow-hidden rounded-base border border-border bg-card transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-    >
-      <div className="relative aspect-square overflow-hidden bg-background">
+    <div className="group relative flex flex-col overflow-hidden rounded-base border border-border bg-card transition-shadow hover:shadow-md">
+      <div className="absolute right-2 top-2 z-10">
+        <WishlistButton slug={product.slug} />
+      </div>
+      <Link
+        href={`/products/${product.slug}`}
+        className="flex flex-1 flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      >
+        <div className="relative aspect-square overflow-hidden bg-background">
         {image ? (
           <Image
             src={image.image}
@@ -37,7 +42,8 @@ export default function ProductCard({ product }: { product: ProductListItem }) {
           </p>
         )}
         <p className="mt-auto pt-2 font-semibold">{formatPrice(product.base_price)}</p>
-      </div>
-    </Link>
+        </div>
+      </Link>
+    </div>
   );
 }

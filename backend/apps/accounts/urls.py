@@ -8,6 +8,8 @@ from .views import (
     MeView,
     MyOrdersView,
     RegisterView,
+    WishlistItemView,
+    WishlistView,
 )
 
 router = DefaultRouter()
@@ -19,5 +21,7 @@ urlpatterns = [
     path("auth/logout/", LogoutView.as_view(), name="logout"),
     path("auth/me/", MeView.as_view(), name="me"),
     path("account/orders/", MyOrdersView.as_view(), name="my-orders"),
+    path("account/wishlist/", WishlistView.as_view(), name="wishlist"),
+    path("account/wishlist/<slug:slug>/", WishlistItemView.as_view(), name="wishlist-item"),
     *router.urls,
 ]

@@ -36,6 +36,14 @@ class ProductListApiTests(APITestCase):
         response = self.client.get("/api/products/?ordering=base_price")
         self.assertEqual(self._slugs(response)[0], "tee")
 
+    def test_search_matches_description(self):
+        Product.objects.create(
+            name="Hoodie", slug="hoodie", category=self.apparel,
+            base_price=Decimal("50.00"), description="warm merino wool",
+        )
+        response = self.client.get("/api/products/?search=merino")
+        self.assertEqual(self._slugs(response), ["hoodie"])
+
 
 class ProductDetailApiTests(APITestCase):
     def setUp(self):
