@@ -1,0 +1,26 @@
+Hi {{ order.shipping_name }},
+
+Thanks for your order! We've received it and it's now being processed.
+
+Order reference: {{ order.reference }}
+Status: {{ order.get_status_display }}
+
+Items
+-----
+{% for item in items %}- {{ item.quantity }} x {{ item.product_name }} ({{ item.variant_name }}) — ${{ item.line_total }}
+{% endfor %}
+Subtotal: ${{ order.subtotal }}{% if order.discount %}
+Discount ({{ order.coupon_code }}): -${{ order.discount }}{% endif %}
+Total: ${{ order.total }}
+
+Shipping to
+-----------
+{{ order.shipping_name }}
+{{ order.shipping_line1 }}{% if order.shipping_line2 %}
+{{ order.shipping_line2 }}{% endif %}
+{{ order.shipping_city }}{% if order.shipping_state %}, {{ order.shipping_state }}{% endif %} {{ order.shipping_postal_code }}
+{{ order.shipping_country }}
+
+We'll email you again when your order ships.
+
+— The Lumen team

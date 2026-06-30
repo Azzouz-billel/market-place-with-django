@@ -1,0 +1,27 @@
+# Python / Django
+backend/venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+backend/media/
+backend/staticfiles/
+
+# Node / Next.js
+node_modules/
+frontend/.next/
+frontend/out/
+frontend/build/
+.env.local
+*.tsbuildinfo
+next-env.d.ts
+
+# Docker
+.env.docker
+
+# Local Claude Code tooling (not part of the project)
+.claude/
+
+# OS / editor
+.DS_Store
+*.log

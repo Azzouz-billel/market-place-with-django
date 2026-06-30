@@ -1,0 +1,14 @@
+Django>=5.1,<5.2
+djangorestframework
+django-cors-headers
+django-filter
+django-environ
+Pillow
+stripe
+
+# Production-only
+psycopg[binary]
+gunicorn
+whitenoise
+django-storages[s3]
+sentry-sdk
