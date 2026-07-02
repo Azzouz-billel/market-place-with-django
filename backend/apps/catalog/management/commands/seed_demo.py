@@ -6,6 +6,7 @@ from django.utils.text import slugify
 from PIL import Image, ImageDraw
 
 from apps.catalog.models import Category, Product, ProductImage, ProductVariant
+from apps.currencies.models import Currency
 from apps.discounts.models import Coupon
 
 # (category name, [(product name, price, [(variant name, sku suffix, stock, price_override)])])
@@ -51,6 +52,17 @@ class Command(BaseCommand):
             Category.objects.all().delete()
             Coupon.objects.all().delete()
             self.stdout.write("Cleared existing catalog data.")
+
+        for code, name, symbol, rate, default in [
+            ("USD", "US Dollar", "$", "1.000000", True),
+            ("EUR", "Euro", "€", "0.920000", False),
+            ("GBP", "British Pound", "£", "0.790000", False),
+            ("DZD", "Algerian Dinar", "DA", "134.000000", False),
+        ]:
+            Currency.objects.get_or_create(
+                code=code,
+                defaults={"name": name, "symbol": symbol, "rate": rate, "is_default": default},
+            )
 
         Coupon.objects.get_or_create(
             code="WELCOME10",

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { useCart } from "@/components/CartProvider";
-import { formatPrice } from "@/lib/format";
+import Money from "@/components/Money";
 
 export default function CartPage() {
   const { cart, loading, updateItem, removeItem, applyCoupon, removeCoupon } = useCart();
@@ -78,7 +78,7 @@ export default function CartPage() {
                   {item.variant.product_name}
                 </Link>
                 <p className="text-sm text-muted">{item.variant.name}</p>
-                <p className="text-sm text-muted">{formatPrice(item.variant.effective_price)} each</p>
+                <p className="text-sm text-muted"><Money amount={item.variant.effective_price} /> each</p>
 
                 <div className="mt-auto flex items-center gap-3 pt-2">
                   <div className="inline-flex items-center rounded-base border border-border">
@@ -114,7 +114,7 @@ export default function CartPage() {
                 </div>
               </div>
 
-              <p className="font-semibold">{formatPrice(item.line_total)}</p>
+              <p className="font-semibold"><Money amount={item.line_total} /></p>
             </li>
           );
         })}
@@ -158,17 +158,17 @@ export default function CartPage() {
 
           <div className="flex items-center justify-between text-sm text-muted">
             <span>Subtotal</span>
-            <span>{formatPrice(cart.subtotal)}</span>
+            <span><Money amount={cart.subtotal} /></span>
           </div>
           {Number(cart.discount) > 0 && (
             <div className="flex items-center justify-between text-sm text-accent">
               <span>Discount</span>
-              <span>−{formatPrice(cart.discount)}</span>
+              <span>−<Money amount={cart.discount} /></span>
             </div>
           )}
           <div className="flex items-center justify-between border-t border-border pt-2 text-lg font-semibold">
             <span>Total</span>
-            <span>{formatPrice(cart.total)}</span>
+            <span><Money amount={cart.total} /></span>
           </div>
         </div>
         <p className="text-sm text-muted">Shipping and taxes calculated at checkout.</p>

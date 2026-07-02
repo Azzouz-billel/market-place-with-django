@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import AuthProvider from "@/components/AuthProvider";
 import CartProvider from "@/components/CartProvider";
+import CurrencyProvider from "@/components/CurrencyProvider";
 import Footer from "@/components/Footer";
 import Nav from "@/components/Nav";
 import WishlistProvider from "@/components/WishlistProvider";
@@ -64,15 +65,17 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationLd) }}
         />
-        <AuthProvider>
-          <WishlistProvider>
-            <CartProvider>
-              <Nav />
-              <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
-              <Footer />
-            </CartProvider>
-          </WishlistProvider>
-        </AuthProvider>
+        <CurrencyProvider>
+          <AuthProvider>
+            <WishlistProvider>
+              <CartProvider>
+                <Nav />
+                <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+                <Footer />
+              </CartProvider>
+            </WishlistProvider>
+          </AuthProvider>
+        </CurrencyProvider>
       </body>
     </html>
   );

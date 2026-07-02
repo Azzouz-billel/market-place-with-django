@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 
 import { useCart } from "@/components/CartProvider";
-import { formatPrice } from "@/lib/format";
+import Money from "@/components/Money";
 import type { Order } from "@/types/order";
 
 function SuccessInner() {
@@ -74,24 +74,24 @@ function SuccessInner() {
                 {item.quantity} × {item.product_name}
                 <span className="text-muted"> ({item.variant_name})</span>
               </span>
-              <span className="font-medium">{formatPrice(item.line_total)}</span>
+              <span className="font-medium"><Money amount={item.line_total} /></span>
             </li>
           ))}
         </ul>
         <div className="flex flex-col gap-2 border-t border-border pt-4">
           <div className="flex justify-between text-sm text-muted">
             <span>Subtotal</span>
-            <span>{formatPrice(order.subtotal)}</span>
+            <span><Money amount={order.subtotal} /></span>
           </div>
           {Number(order.discount) > 0 && (
             <div className="flex justify-between text-sm text-accent">
               <span>Discount{order.coupon_code ? ` (${order.coupon_code})` : ""}</span>
-              <span>−{formatPrice(order.discount)}</span>
+              <span>−<Money amount={order.discount} /></span>
             </div>
           )}
           <div className="flex justify-between text-lg font-semibold">
             <span>Total</span>
-            <span>{formatPrice(order.total)}</span>
+            <span><Money amount={order.total} /></span>
           </div>
         </div>
       </section>

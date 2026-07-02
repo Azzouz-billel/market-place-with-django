@@ -3,6 +3,7 @@ import { Suspense } from "react";
 
 import AuthNav from "./AuthNav";
 import CartBadge from "./CartBadge";
+import CurrencySwitcher from "./CurrencySwitcher";
 import SearchBar from "./SearchBar";
 
 export default function Nav() {
@@ -25,6 +26,7 @@ export default function Nav() {
             All products
           </Link>
           <AuthNav />
+          <CurrencySwitcher />
           <CartBadge />
         </div>
       </nav>

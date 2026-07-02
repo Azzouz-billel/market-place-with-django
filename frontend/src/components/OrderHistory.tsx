@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { formatPrice } from "@/lib/format";
+import Money from "@/components/Money";
 import type { Order } from "@/types/order";
 
 export default function OrderHistory() {
@@ -40,7 +40,7 @@ export default function OrderHistory() {
             <span className="rounded-base bg-background px-2 py-1 text-xs font-medium capitalize">
               {order.status}
             </span>
-            <span className="font-semibold">{formatPrice(order.total)}</span>
+            <span className="font-semibold"><Money amount={order.total} /></span>
           </div>
           <ul className="mt-3 flex flex-col gap-1 text-sm text-muted" role="list">
             {order.items.map((item) => (

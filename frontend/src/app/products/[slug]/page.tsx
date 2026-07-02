@@ -3,12 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import ImageGallery from "@/components/ImageGallery";
+import Money from "@/components/Money";
 import ProductGrid from "@/components/ProductGrid";
 import ProductReviews from "@/components/ProductReviews";
 import VariantSelector from "@/components/VariantSelector";
 import WishlistButton from "@/components/WishlistButton";
 import { getProduct } from "@/lib/api";
-import { formatPrice } from "@/lib/format";
 import { SITE_URL } from "@/lib/site";
 
 type Params = Promise<{ slug: string }>;
@@ -87,7 +87,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
               <h1 className="text-3xl font-semibold tracking-tight">{product.name}</h1>
               <WishlistButton slug={product.slug} />
             </div>
-            <p className="text-2xl font-semibold">{formatPrice(product.base_price)}</p>
+            <p className="text-2xl font-semibold"><Money amount={product.base_price} /></p>
           </div>
 
           {product.description && (

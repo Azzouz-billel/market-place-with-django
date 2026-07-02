@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import Money from "@/components/Money";
 import Stars from "@/components/Stars";
 import WishlistButton from "@/components/WishlistButton";
-import { formatPrice } from "@/lib/format";
 import type { ProductListItem } from "@/types/catalog";
 
 export default function ProductCard({ product }: { product: ProductListItem }) {
@@ -41,7 +41,7 @@ export default function ProductCard({ product }: { product: ProductListItem }) {
             <span>({product.review_count})</span>
           </p>
         )}
-        <p className="mt-auto pt-2 font-semibold">{formatPrice(product.base_price)}</p>
+        <p className="mt-auto pt-2 font-semibold"><Money amount={product.base_price} /></p>
         </div>
       </Link>
     </div>

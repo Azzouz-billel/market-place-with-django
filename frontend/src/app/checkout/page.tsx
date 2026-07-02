@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import { useAuth } from "@/components/AuthProvider";
 import { useCart } from "@/components/CartProvider";
-import { formatPrice } from "@/lib/format";
+import Money from "@/components/Money";
 import type { Address } from "@/types/account";
 
 type FieldConfig = {
@@ -208,24 +208,24 @@ export default function CheckoutPage() {
                 {item.quantity} × {item.variant.product_name}
                 <span className="text-muted"> ({item.variant.name})</span>
               </span>
-              <span className="font-medium">{formatPrice(item.line_total)}</span>
+              <span className="font-medium"><Money amount={item.line_total} /></span>
             </li>
           ))}
         </ul>
         <div className="flex flex-col gap-2 border-t border-border pt-4">
           <div className="flex justify-between text-sm text-muted">
             <span>Subtotal</span>
-            <span>{formatPrice(cart.subtotal)}</span>
+            <span><Money amount={cart.subtotal} /></span>
           </div>
           {Number(cart.discount) > 0 && (
             <div className="flex justify-between text-sm text-accent">
               <span>Discount{cart.coupon_code ? ` (${cart.coupon_code})` : ""}</span>
-              <span>−{formatPrice(cart.discount)}</span>
+              <span>−<Money amount={cart.discount} /></span>
             </div>
           )}
           <div className="flex justify-between text-lg font-semibold">
             <span>Total</span>
-            <span>{formatPrice(cart.total)}</span>
+            <span><Money amount={cart.total} /></span>
           </div>
         </div>
       </aside>

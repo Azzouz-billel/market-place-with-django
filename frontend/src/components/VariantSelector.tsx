@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 
-import { formatPrice } from "@/lib/format";
 import type { ProductVariant } from "@/types/catalog";
 import { useCart } from "./CartProvider";
+import { useCurrency } from "./CurrencyProvider";
 
 type Status = { kind: "idle" | "success" | "error"; message?: string };
 
 export default function VariantSelector({ variants }: { variants: ProductVariant[] }) {
   const { addItem } = useCart();
+  const { format } = useCurrency();
   const firstAvailable = variants.find((variant) => variant.in_stock) ?? null;
   const [selectedId, setSelectedId] = useState<number | null>(firstAvailable?.id ?? null);
   const [quantity, setQuantity] = useState(1);
@@ -66,7 +67,7 @@ export default function VariantSelector({ variants }: { variants: ProductVariant
 
       <p className="text-sm text-muted" aria-live="polite">
         {selected
-          ? `${selected.name}: ${formatPrice(selected.effective_price)} · ${
+          ? `${selected.name}: ${format(selected.effective_price)} · ${
               selected.in_stock ? `${selected.stock_quantity} in stock` : "Out of stock"
             }`
           : "Select an option to see price and availability."}

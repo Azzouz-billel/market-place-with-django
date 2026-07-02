@@ -1,0 +1,9 @@
+import { NextResponse } from "next/server";
+
+import { API_BASE } from "@/lib/cart-server";
+
+export async function GET() {
+  const res = await fetch(`${API_BASE}/currencies/`, { cache: "no-store" });
+  const data = await res.json();
+  return NextResponse.json(data, { status: res.status });
+}
