@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "apps.reviews",
     "apps.currencies",
     "apps.marketing",
+    "apps.dashboard",
 ]
 
 MIDDLEWARE = [
